@@ -1,10 +1,10 @@
 # pull node base image.
-FROM node:5.3-wheezy
+FROM node:0.12-wheezy
 
 MAINTAINER Nicolas Toublanc <n.toublanc@gmail.com>
 
 # install common tools
-ENV APT_PACKAGES wget vim
+ENV APT_PACKAGES wget vim sudo
 
 # install via APT (do not clean sources as we want to be able to install more packages from the development container)
 RUN apt-get update && \
