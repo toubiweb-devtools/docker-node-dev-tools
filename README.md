@@ -7,8 +7,8 @@ Docker image to build or run applications in development mode using nodejs.
 This image is based on official node.js docker image (Debian stable, Wheezy). 
 
 Current version includes:
-* node 5.3
-* general tools: wget, vim
+* node 0.12
+* general tools: wget, vim, sudo
 * node development tools: bower, grunt, cli
 
 The default docker user is "dev", and has sudo rights without password.
