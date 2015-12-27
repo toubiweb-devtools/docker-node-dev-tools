@@ -1,15 +1,15 @@
 # docker-node-dev-tools
 
-Docker image to build or run application in development mode
+Docker image to build or run applications in development mode using nodejs.
 
 ## What is included?
 
 This image is based on official node.js docker image (Debian stable, Wheezy). 
 
-Current version include:
+Current version includes:
 * node 5.3
 * general tools: wget, vim
-* node dev tools: bower, grunt, cli
+* node development tools: bower, grunt, cli
 
 The default docker user is "dev", and has sudo rights without password.
 
