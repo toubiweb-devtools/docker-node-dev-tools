@@ -24,4 +24,4 @@ RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 USER dev
 
 # set default working directory
-WORKDIR /app
+WORKDIR /app/sources

@@ -9,11 +9,11 @@ This image is based on official node.js docker image (Debian stable, Wheezy).
 Current version includes:
 * node 5.3
 * general tools: wget, vim, sudo
-* node development tools: bower, grunt, cli
+* node development tools: bower, grunt, gulp
 
 The default docker user is "dev", and has sudo rights without password.
 
-The default directory is /app
+The default directory is /app/sources
 
 ## How to use
 	
