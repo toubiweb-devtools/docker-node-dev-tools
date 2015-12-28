@@ -7,7 +7,7 @@ Docker image to build or run applications in development mode using nodejs.
 This image is based on official node.js docker image (Debian stable, Wheezy). 
 
 Current version includes:
-* node 0.12
+* node 5.3
 * general tools: wget, vim, sudo
 * node development tools: bower, grunt, cli
 
@@ -16,18 +16,6 @@ The default docker user is "dev", and has sudo rights without password.
 The default directory is /app
 
 ## How to use
-
-### Build docker image from sources
-
-Get sources:
-
-	git clone git@github.com:toubiweb/docker-node-dev-tools.git
-
-Build container
-
-	cd docker-node-dev-tools
-	docker build -t="toubiweb/docker-node-dev-tools" .
-
 	
 ### Use the image during delivery process to build your application
 
@@ -48,7 +36,7 @@ To keep the state of your dev container (including node cache, installed tools) 
 	  image: toubiweb/docker-node-dev-tools
 	  command: tail -f /dev/null
 	  volumes:
-		- /home/toub/Documents/dev/jeromebouyer/jb-fullstack/jb-client:/app
+		- /home/me/dev/my-app:/app
 	  ports:
 		- 3000:3000
 		- 3001:3001
@@ -78,3 +66,15 @@ After have left the container, you can stop it:
 	
 
 You may want to use the run-dev.sh script.
+
+
+### Optional: build docker image from sources
+
+Get sources:
+
+	git clone git@github.com:toubiweb/docker-node-dev-tools.git
+
+Build container
+
+	cd docker-node-dev-tools
+	docker build -t="toubiweb/docker-node-dev-tools" .
