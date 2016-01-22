@@ -4,10 +4,10 @@ Docker image to build or run applications in development mode using nodejs.
 
 ## What is included?
 
-This image is based on official node.js docker image (Debian stable, Wheezy). 
+This image is based on official node.js docker image (Debian stable, Jessie). 
 
 Current version includes:
-* node 5.3
+* node 5.5
 * general tools: wget, vim, sudo
 * node development tools: bower, grunt, gulp
 

@@ -1,5 +1,5 @@
 # pull node base image.
-FROM node:5.3-wheezy
+FROM node:0.12
 
 MAINTAINER Nicolas Toublanc <n.toublanc@gmail.com>
 
