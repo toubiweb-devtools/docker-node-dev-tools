@@ -7,7 +7,7 @@ Docker image to build or run applications in development mode using nodejs.
 This image is based on official node.js docker image (Debian stable, Jessie). 
 
 Current version includes:
-* node 5.5
+* node 0.12
 * general tools: wget, vim, sudo
 * node development tools: bower, grunt, gulp
 
@@ -21,11 +21,13 @@ The default directory is /app/sources
 
 Mount your application sources as a volume (using -v option) and run your build command (e.g. gulp build).
 
-	docker run --rm -v /home/me/dev/my-app:/app -t toubiweb/docker-node-dev-tools gulp build
+	docker run --rm -u root -v /home/me/dev/my-app:/app -t toubiweb/docker-node-dev-tools gulp build
+
+It is recommanded to run it as root to enjoyu
 
 You can override the default directory using -w option:
 
-	docker run --rm -v /home/me/dev/my-app:/www/my-app -w /www/my-app -t toubiweb/docker-node-dev-tools gulp build
+	docker run --rm -u root -v /home/me/dev/my-app:/www/my-app -w /www/my-app -t toubiweb/docker-node-dev-tools gulp build
 
 ### Use the image in development to run your tests, your application...
 
@@ -41,6 +43,8 @@ To keep the state of your dev container (including node cache, installed tools) 
 		- 3000:3000
 		- 3001:3001
 		- 35729:35729
+        
+Use data containers to mount your sources in order to ensure full rights access to docker "dev" users. Alternatives: use "sudo" or run it as "root" user.
 
 Then run your container via docker-compose:
 

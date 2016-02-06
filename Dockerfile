@@ -1,5 +1,5 @@
 # pull node base image.
-FROM node:5.5
+FROM node:0.12
 
 MAINTAINER Nicolas Toublanc <n.toublanc@gmail.com>
 
@@ -20,8 +20,11 @@ RUN adduser --disabled-password --gecos '' dev
 RUN adduser dev sudo
 RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 
-# set default docker user
-USER dev
-
 # set default working directory
 WORKDIR /app/sources
+
+# FIXME use data container instead: http://stackoverflow.com/questions/23544282/what-is-the-best-way-to-manage-permissions-for-docker-shared-volumes
+RUN chown -R dev /app/sources
+
+# set default user
+USER dev
