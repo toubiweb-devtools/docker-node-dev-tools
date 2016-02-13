@@ -1,5 +1,5 @@
 # pull node base image.
-FROM node:5.5
+FROM node:5.6
 
 MAINTAINER Nicolas Toublanc <n.toublanc@gmail.com>
 
