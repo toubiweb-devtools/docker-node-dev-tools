@@ -7,7 +7,7 @@ Docker image to build or run applications in development mode using nodejs.
 This image is based on official node.js docker image (Debian stable, Jessie). 
 
 Current version includes:
-* node 5.6
+* node 6.2
 * general tools: wget, vim, sudo
 * node development tools: bower, grunt, gulp
 
@@ -77,4 +77,8 @@ Get sources:
 Build container
 
 	cd docker-node-dev-tools
-	docker build -t="toubiweb/docker-node-dev-tools" .
+	docker build -t="toubiweb/docker-node-dev-tools:6.2" .
+
+Optionnaly, push to docker registry
+
+	docker push toubiweb/docker-node-dev-tools:6.2
