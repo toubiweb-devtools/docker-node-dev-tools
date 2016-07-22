@@ -11,7 +11,7 @@ RUN apt-get update && \
     apt-get install -q -y -o Acquire::Retries=10 $APT_PACKAGES
 
 # install common build tools globally via npm
-ENV GLOBAL_NPM_PACKAGES bower gulp grunt-cli
+ENV GLOBAL_NPM_PACKAGES bower gulpjs/gulp-cli grunt-cli
 
 RUN npm install -g $GLOBAL_NPM_PACKAGES
 
