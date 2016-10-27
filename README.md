@@ -1,8 +1,6 @@
 # Docker node dev tools
 
-[![](https://images.microbadger.com/badges/image/toubiweb/docker-node-dev-tools.svg)](https://microbadger.com/images/toubiweb/docker-node-dev-tools "Get your own image badge on microbadger.com")
-
-[![](https://images.microbadger.com/badges/version/toubiweb/docker-node-dev-tools.svg)](https://microbadger.com/images/toubiweb/docker-node-dev-tools "Get your own version badge on microbadger.com")
+[![](https://images.microbadger.com/badges/version/toubiweb/docker-node-dev-tools.svg)](https://microbadger.com/images/toubiweb/docker-node-dev-tools "Get your own version badge on microbadger.com") [![](https://images.microbadger.com/badges/image/toubiweb/docker-node-dev-tools.svg)](https://microbadger.com/images/toubiweb/docker-node-dev-tools "Get your own image badge on microbadger.com")
 
 ## What is Docker node dev tools?
 
@@ -15,22 +13,24 @@ This image is based on official node.js docker image (Debian stable, Jessie).
 Current version includes:
 
 * node 6.9 and 7.0
-* general tools: wget, vim, sudo
-* node development tools: yeoman, gulp, grunt, bower
-* a default "dev" user with sudo rights without password
-* a default working directory: /app
+* node development tools: npm, gulp, grunt, bower, forever, yeoman, angular-cli
+* system tools: wget, vim
+
+The container starts by default:
+* with a "dev" user granted to sudo without password
+* in a default working directory: /app
 
 ## How to use this image
 
 ### Quick start
+
+Use the image in development to install tools and dependencies, run your tests, your application...
 
 ```bash
 docker run --rm -it -v $HOME/my-app:/app -t toubiweb/docker-node-dev-tools bash
 ```
 
 ### How to use this image to develop nodejs applications
-
-Use the image in development to run your tests, your application...
 
 To keep the state of your dev container (including node cache, installed tools) between to usage, it is a good idea to create a docker-compose file:
 
