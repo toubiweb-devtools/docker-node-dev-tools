@@ -66,12 +66,30 @@ docker run --rm -v /home/me/dev/my-app:/www/my-app -w /www/my-app -t toubiweb/do
 
 ## Supported Node.js versions
 
-Currently, node v6.9 and node v7 are supported:
+To use last node [Long Term Support version](https://github.com/nodejs/LTS#lts-schedule) (6.x):
 
+```bash
+docker run --rm -it -v $HOME/my-app:/app -t toubiweb/docker-node-dev-tools:lts bash
+```
+or
+```bash
+docker run --rm -it -v $HOME/my-app:/app -t toubiweb/docker-node-dev-tools:6.x bash
+```
+or
 ```bash
 docker run --rm -it -v $HOME/my-app:/app -t toubiweb/docker-node-dev-tools:6.9 bash
 ```
 
+To use CURRENT (7.x) version:
+
+```bash
+docker run --rm -it -v $HOME/my-app:/app -t toubiweb/docker-node-dev-tools bash
+```
+or
+```bash
+docker run --rm -it -v $HOME/my-app:/app -t toubiweb/docker-node-dev-tools:7.x bash
+```
+or
 ```bash
 docker run --rm -it -v $HOME/my-app:/app -t toubiweb/docker-node-dev-tools:7.0 bash
 ```
