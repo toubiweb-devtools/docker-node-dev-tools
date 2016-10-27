@@ -1,6 +1,12 @@
-# docker-node-dev-tools
+# Docker node dev tools
 
-Docker image to build or run applications in development mode using nodejs.
+[![](https://images.microbadger.com/badges/image/toubiweb/docker-node-dev-tools.svg)](https://microbadger.com/images/toubiweb/docker-node-dev-tools "Get your own image badge on microbadger.com")
+
+[![](https://images.microbadger.com/badges/version/toubiweb/docker-node-dev-tools.svg)](https://microbadger.com/images/toubiweb/docker-node-dev-tools "Get your own version badge on microbadger.com")
+
+## What is Docker node dev tools?
+
+A docker container packaged with common Node.js dev tools.
 
 ## What is included?
 
@@ -8,15 +14,45 @@ This image is based on official node.js docker image (Debian stable, Jessie).
 
 Current version includes:
 
-* node 6.2
+* node 6.9 and 7.0
 * general tools: wget, vim, sudo
-* node development tools: bower, grunt, gulp
+* node development tools: yeoman, gulp, grunt, bower
+* a default "dev" user with sudo rights without password
+* a default working directory: /app
 
-The default docker user is "dev", and has sudo rights without password.
+## How to use this image
 
-The default directory is /app/sources
+### Quick start
 
-## How to use
+```bash
+docker run --rm -it -v $HOME/my-app:/app -t toubiweb/docker-node-dev-tools bash
+```
+
+### How to use this image to develop nodejs applications
+
+Use the image in development to run your tests, your application...
+
+To keep the state of your dev container (including node cache, installed tools) between to usage, it is a good idea to create a docker-compose file:
+
+```yml
+dev:
+  container_name: my-app
+  image: toubiweb/docker-node-dev-tools
+  command: tail -f /dev/null
+  volumes:
+    - .:/app
+    - $HOME/.ssh:/home/dev/.ssh
+    - $HOME/.gitconfig:/home/dev/.gitconfig
+  ports:
+	- 3000:3000
+	- 3001:3001
+	- 35729:35729
+```
+In this example, we also share ssh and git config so we can commit/push changes from within the container.
+
+See [dev.docker-compose.yml](https://github.com/toubiweb/docker-node-dev-tools/blob/master/dev.docker-compose.yml)
+ and [run-dev.sh](https://github.com/toubiweb/docker-node-dev-tools/blob/master/run-dev.sh)
+ files for a working example.
 
 ### Usage during delivery process
 
@@ -25,83 +61,25 @@ Use the image during delivery process to build your application.
 Mount your application sources as a volume (using -v option) and run your build command (e.g. gulp build).
 
 ```bash
-docker run --rm -v /home/me/dev/my-app:/app -t toubiweb/docker-node-dev-tools gulp build
-```
-
-You can override the default directory using -w option:
-
-```bash
 docker run --rm -v /home/me/dev/my-app:/www/my-app -w /www/my-app -t toubiweb/docker-node-dev-tools gulp build
 ```
 
-### Usage during development
+## Supported Node.js versions
 
-Use the image in development to run your tests, your application...
-
-To keep the state of your dev container (including node cache, installed tools) between to usage, it is a good idea to create a docker-compose file:
-
-```yml
-dev:
-  container_name: myapp-dev
-  image: toubiweb/docker-node-dev-tools
-  command: tail -f /dev/null
-  volumes:
-	- /home/me/dev/my-app:/app
-  ports:
-	- 3000:3000
-	- 3001:3001
-	- 35729:35729
-```
-
-Then run your container via docker-compose:
+Currently, node v6.9 and node v7 are supported:
 
 ```bash
-	docker-compose up -d
+docker run --rm -it -v $HOME/my-app:/app -t toubiweb/docker-node-dev-tools:6.9 bash
 ```
-
-Then enter to the container
 
 ```bash
-	docker exec -it myapp-dev /bin/bash
+docker run --rm -it -v $HOME/my-app:/app -t toubiweb/docker-node-dev-tools:7.0 bash
 ```
 
-Finally, run the commands to build, test, or run your application:
+## Supported Docker versions
 
-```bash
-	npm install
+This image has been tested successfully on Docker version 1.12.3, but it should work on previous versions.
 
-	docker install
+## License
 
-	gulp test
-
-	grunt serve
-```
-
-After have left the container, you can stop it:
-
-```bash
-	docker stop myapp-dev
-```
-
-You may want to use the run-dev.sh script.
-
-### Optional: build docker image from sources
-
-Get sources:
-
-```bash
-	git clone git@github.com:toubiweb/docker-node-dev-tools.git
-```
-
-Build container
-
-```bash
-	cd docker-node-dev-tools
-	docker build -t="toubiweb/docker-node-dev-tools:6.2.1" .
-```
-
-Optionnaly, push to docker registry
-
-```bash
-	docker push toubiweb/docker-node-dev-tools:6.2.1
-```
+[Apache-2](https://github.com/toubiweb/docker-node-dev-tools/blob/master/LICENSE)

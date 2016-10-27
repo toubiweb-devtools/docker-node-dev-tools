@@ -1,0 +1,8 @@
+dev:
+  container_name: node-dev-tools
+  image: toubiweb/docker-node-dev-tools:7.0
+  command: tail -f /dev/null
+  volumes:
+    - .:/app
+    - $HOME/.ssh:/home/dev/.ssh
+    - $HOME/.gitconfig:/home/dev/.gitconfig

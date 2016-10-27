@@ -1,5 +1,5 @@
 # pull node base image.
-FROM node:6.2
+FROM node:7.0
 
 MAINTAINER Nicolas Toublanc <n.toublanc@gmail.com>
 
@@ -11,9 +11,12 @@ RUN apt-get update && \
     apt-get install -q -y -o Acquire::Retries=10 $APT_PACKAGES
 
 # install common build tools globally via npm
-ENV GLOBAL_NPM_PACKAGES bower gulpjs/gulp-cli grunt-cli
+ENV GLOBAL_NPM_PACKAGES bower gulpjs/gulp-cli grunt-cli yo generator-generator generator-fountain-webapp generator-angular-fullstack generator-node forever angular-cli
 
 RUN npm install -g $GLOBAL_NPM_PACKAGES
+
+# upgrade inquired to fix this bug while running yeoman: https://github.com/SBoudrias/Inquirer.js/pull/297
+RUN npm install inquirer --upgrade
 
 # allow user to go sudo without password
 RUN adduser --disabled-password --gecos '' dev
@@ -24,4 +27,9 @@ RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 USER dev
 
 # set default working directory
-WORKDIR /app/sources
+WORKDIR /app
+
+LABEL org.label-schema.name="Docker node dev tools" \
+      org.label-schema.vcs-ref=$VCS_REF \
+      org.label-schema.vcs-url="https://github.com/toubiweb/docker-node-dev-tools" \
+      org.label-schema.license="Apache-2.0"
