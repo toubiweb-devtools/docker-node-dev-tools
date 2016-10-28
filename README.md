@@ -13,8 +13,10 @@ This image is based on official node.js docker image (Debian stable, Jessie).
 Current version includes:
 
 * node 6.9 and 7.0
-* node development tools: npm, gulp, grunt, bower, forever, yeoman, angular-cli
+* node development tools: npm, gulp, grunt, bower, forever, yeoman, angular-cli, ava
 * system tools: wget, vim
+* [sexy bash prompt](https://github.com/twolfson/sexy-bash-prompt)
+* [ls colors](https://github.com/trapd00r/LS_COLORS)
 
 The container starts by default:
 * with a "dev" user granted to sudo without password
@@ -68,12 +70,17 @@ docker run --rm -v /home/me/dev/my-app:/www/my-app -w /www/my-app -t toubiweb/do
 
 To use last node [Long Term Support version](https://github.com/nodejs/LTS#lts-schedule) (6.x):
 
+
+```bash
+docker run --rm -it -v $HOME/my-app:/app -t toubiweb/docker-node-dev-tools bash
+```
+or
 ```bash
 docker run --rm -it -v $HOME/my-app:/app -t toubiweb/docker-node-dev-tools:lts bash
 ```
 or
 ```bash
-docker run --rm -it -v $HOME/my-app:/app -t toubiweb/docker-node-dev-tools:6.x bash
+docker run --rm -it -v $HOME/my-app:/app -t toubiweb/docker-node-dev-tools:6 bash
 ```
 or
 ```bash
@@ -83,15 +90,21 @@ docker run --rm -it -v $HOME/my-app:/app -t toubiweb/docker-node-dev-tools:6.9 b
 To use CURRENT (7.x) version:
 
 ```bash
-docker run --rm -it -v $HOME/my-app:/app -t toubiweb/docker-node-dev-tools bash
+docker run --rm -it -v $HOME/my-app:/app -t toubiweb/docker-node-dev-tools:current bash
 ```
 or
 ```bash
-docker run --rm -it -v $HOME/my-app:/app -t toubiweb/docker-node-dev-tools:7.x bash
+docker run --rm -it -v $HOME/my-app:/app -t toubiweb/docker-node-dev-tools:7 bash
 ```
 or
 ```bash
 docker run --rm -it -v $HOME/my-app:/app -t toubiweb/docker-node-dev-tools:7.0 bash
+```
+
+Tags are frequently updated: be sure to use the last image, e.g. for lts:
+
+```bash
+docker pull toubiweb/docker-node-dev-tools:lts
 ```
 
 ## Supported Docker versions

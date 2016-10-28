@@ -10,18 +10,24 @@ ENV APT_PACKAGES wget vim sudo
 RUN apt-get update && \
     apt-get install -q -y -o Acquire::Retries=10 $APT_PACKAGES
 
+# allow user to go sudo without password
+RUN adduser --disabled-password --gecos '' dev
+RUN adduser dev sudo
+RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
+
+# sexy bash prompt: https://github.com/twolfson/sexy-bash-prompt
+RUN (cd /tmp && git clone --quiet --depth 1 --config core.autocrlf=false https://github.com/twolfson/sexy-bash-prompt && cd sexy-bash-prompt && make --quiet install && rm -rf /tmp/sexy-bash-prompt/ && cp ~/.bash_prompt /etc/bash.sexy-bash-prompt && echo '. /etc/bash.sexy-bash-prompt' >> /etc/bash.bashrc && echo '. /etc/bash.sexy-bash-prompt' >> /home/dev/.bashrc)
+
+# ls colors: https://github.com/trapd00r/LS_COLORS
+RUN wget --quiet https://raw.github.com/trapd00r/LS_COLORS/master/LS_COLORS -O /etc/bash.dircolors && echo 'eval $(dircolors -b /etc/bash.dircolors)' >> /etc/bash.bashrc && echo 'eval $(dircolors -b /etc/bash.dircolors)' >> /home/dev/.bashrc
+
 # install common build tools globally via npm
-ENV GLOBAL_NPM_PACKAGES bower gulpjs/gulp-cli grunt-cli yo generator-generator generator-fountain-webapp generator-angular-fullstack generator-node forever angular-cli
+ENV GLOBAL_NPM_PACKAGES bower gulpjs/gulp-cli grunt-cli yo generator-generator generator-fountain-webapp generator-angular-fullstack generator-node forever angular-cli ava
 
 RUN npm install -g $GLOBAL_NPM_PACKAGES
 
 # upgrade inquired to fix this bug while running yeoman: https://github.com/SBoudrias/Inquirer.js/pull/297
 RUN npm install inquirer --upgrade
-
-# allow user to go sudo without password
-RUN adduser --disabled-password --gecos '' dev
-RUN adduser dev sudo
-RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 
 # set default docker user
 USER dev
