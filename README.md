@@ -13,7 +13,7 @@ This image is based on official node.js docker image (Debian stable, Jessie).
 Current version includes:
 
 * node 6.9 and 7.0
-* node development tools: npm, gulp, grunt, bower, forever, yeoman, angular-cli, ava
+* node development tools: npm, gulp, grunt, bower, forever, yeoman, angular-cli, ava, strongloop, swagger, sails
 * system tools: wget, vim
 * [sexy bash prompt](https://github.com/twolfson/sexy-bash-prompt)
 * [ls colors](https://github.com/trapd00r/LS_COLORS)

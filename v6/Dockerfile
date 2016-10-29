@@ -22,7 +22,7 @@ RUN (cd /tmp && git clone --quiet --depth 1 --config core.autocrlf=false https:/
 RUN wget --quiet https://raw.github.com/trapd00r/LS_COLORS/master/LS_COLORS -O /etc/bash.dircolors && echo 'eval $(dircolors -b /etc/bash.dircolors)' >> /etc/bash.bashrc && echo 'eval $(dircolors -b /etc/bash.dircolors)' >> /home/dev/.bashrc
 
 # install common build tools globally via npm
-ENV GLOBAL_NPM_PACKAGES bower gulpjs/gulp-cli grunt-cli yo generator-generator generator-fountain-webapp generator-angular-fullstack generator-node forever angular-cli ava
+ENV GLOBAL_NPM_PACKAGES bower gulpjs/gulp-cli grunt-cli yo generator-generator generator-fountain-webapp generator-angular-fullstack generator-node forever angular-cli ava strongloop swagger sails
 
 RUN npm install -g $GLOBAL_NPM_PACKAGES
 
@@ -34,6 +34,9 @@ USER dev
 
 # set default working directory
 WORKDIR /app
+
+# force color to be displayed by node: https://github.com/chalk/chalk/issues/79
+ENV FORCE_COLOR=1
 
 LABEL org.label-schema.name="Docker node dev tools" \
       org.label-schema.vcs-ref=$VCS_REF \
