@@ -13,7 +13,7 @@ This image is based on official node.js docker image (Debian stable, Jessie).
 Current version includes:
 
 * node 6.9 and 7.0
-* node development tools: npm, gulp, grunt, bower, forever, yeoman, angular-cli, ava, strongloop, swagger, sails
+* node development tools: npm, gulp, grunt, webpack, webpack-dev-server, karma-cli, protractor, typescript, bower, forever, nodemon, node-supervisor, yeoman, angular-cli, ava, strongloop, swagger, sails
 * system tools: wget, vim
 * [sexy bash prompt](https://github.com/twolfson/sexy-bash-prompt)
 * [ls colors](https://github.com/trapd00r/LS_COLORS)
@@ -22,6 +22,13 @@ The container starts by default:
 * with a "dev" user granted to sudo without password
 * in a default working directory: /app
 
+## TODO
+
+Add:
+
+* [Yeoman generator from Webpack library starter](https://github.com/krasimir/webpack-library-starter)
+* or [generator-babel-webpack-karma](https://github.com/ianaya89/generator-babel-webpack-karma#readme)
+*
 ## How to use this image
 
 ### Quick start
