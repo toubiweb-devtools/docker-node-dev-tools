@@ -66,9 +66,9 @@ dev:
     - $HOME/.ssh:/home/dev/.ssh
     - $HOME/.gitconfig:/home/dev/.gitconfig
   ports:
-	- 3000:3000
-	- 3001:3001
-	- 35729:35729
+    - 3000:3000
+    - 3001:3001
+    - 35729:35729
 ```
 In this example, we also share ssh and git config so we can commit/push changes from within the container.
 
