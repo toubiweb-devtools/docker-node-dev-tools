@@ -14,7 +14,7 @@ Parent image, based on official node.js image (Debian stable, Jessie).
 
 Current version includes:
 
-* node 6.11 and 8.0
+* node 6.11 and 8.1
 * system tools: wget, vim, git
 * [sexy bash prompt](https://github.com/twolfson/sexy-bash-prompt)
 * [ls colors](https://github.com/trapd00r/LS_COLORS)
