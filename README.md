@@ -1,34 +1,47 @@
 # Docker node dev tools
 
-[![](https://images.microbadger.com/badges/version/toubiweb/docker-node-dev-tools.svg)](https://microbadger.com/images/toubiweb/docker-node-dev-tools "Get your own version badge on microbadger.com") [![](https://images.microbadger.com/badges/image/toubiweb/docker-node-dev-tools.svg)](https://microbadger.com/images/toubiweb/docker-node-dev-tools "Get your own image badge on microbadger.com")
+[![](https://images.microbadger.com/badges/version/toubiweb/node-dev-tools.svg)](https://microbadger.com/images/toubiweb/node-dev-tools "Get your own version badge on microbadger.com") [![](https://images.microbadger.com/badges/image/toubiweb/node-dev-tools.svg)](https://microbadger.com/images/toubiweb/node-dev-tools "Get your own image badge on microbadger.com")
 
 ## What is Docker node dev tools?
 
-A docker container packaged with common Node.js dev tools.
+A few docker images used as base to run Node.js as development or production.
 
 ## What is included?
 
-This image is based on official node.js docker image (Debian stable, Jessie).
+### toubiweb/node-core image
+
+Parent image, based on official node.js image (Debian stable, Jessie).
 
 Current version includes:
 
-* node 6.9 and 7.0
-* node development tools: npm, gulp, grunt, webpack, webpack-dev-server, karma-cli, protractor, typescript, bower, forever, nodemon, node-supervisor, yeoman, angular-cli, ava, strongloop, swagger, sails
-* system tools: wget, vim
+* node 6.11 and 8.0
+* system tools: wget, vim, git
 * [sexy bash prompt](https://github.com/twolfson/sexy-bash-prompt)
 * [ls colors](https://github.com/trapd00r/LS_COLORS)
+* a default working directory: /app
 
-The container starts by default:
-* with a "dev" user granted to sudo without password
-* in a default working directory: /app
+### toubiweb/node-dev image
 
-## TODO
+Development-mode image, based on toubiweb/node-core
 
-Add:
+This image provide additionally:
+* a "dev" user granted to sudo without password
 
-* [Yeoman generator from Webpack library starter](https://github.com/krasimir/webpack-library-starter)
-* or [generator-babel-webpack-karma](https://github.com/ianaya89/generator-babel-webpack-karma#readme)
-*
+### toubiweb/node-dev-tools image
+
+Development-mode image, based on toubiweb/node-core
+
+This image provide additionally:
+* node development tools: npm, gulp, grunt, webpack, webpack-dev-server, @angular/cli, karma-cli, protractor, typescript, forever, nodemon, node-supervisor, yeoman, ava
+
+### toubiweb/node-prod image
+
+Producation-mode image, based on toubiweb/node-core
+
+This image provide additionally:
+* a "prod" user without password
+* node production mode enabled by default
+
 ## How to use this image
 
 ### Quick start
@@ -36,7 +49,7 @@ Add:
 Use the image in development to install tools and dependencies, run your tests, your application...
 
 ```bash
-docker run --rm -it -v $HOME/my-app:/app -t toubiweb/docker-node-dev-tools bash
+docker run --rm -it -v $HOME/my-app:/app -t toubiweb/node-dev-tools bash
 ```
 
 ### How to use this image to develop nodejs applications
@@ -46,7 +59,7 @@ To keep the state of your dev container (including node cache, installed tools) 
 ```yml
 dev:
   container_name: my-app
-  image: toubiweb/docker-node-dev-tools
+  image: toubiweb/node-dev-tools
   command: tail -f /dev/null
   volumes:
     - .:/app
@@ -59,8 +72,8 @@ dev:
 ```
 In this example, we also share ssh and git config so we can commit/push changes from within the container.
 
-See [dev.docker-compose.yml](https://github.com/toubiweb/docker-node-dev-tools/blob/master/dev.docker-compose.yml)
- and [run-dev.sh](https://github.com/toubiweb/docker-node-dev-tools/blob/master/run-dev.sh)
+See [dev.docker-compose.yml](https://github.com/toubiweb/node-dev-tools/blob/master/dev.docker-compose.yml)
+ and [run-dev.sh](https://github.com/toubiweb/node-dev-tools/blob/master/run-dev.sh)
  files for a working example.
 
 ### Usage during delivery process
@@ -70,7 +83,7 @@ Use the image during delivery process to build your application.
 Mount your application sources as a volume (using -v option) and run your build command (e.g. gulp build).
 
 ```bash
-docker run --rm -v /home/me/dev/my-app:/www/my-app -w /www/my-app -t toubiweb/docker-node-dev-tools gulp build
+docker run --rm -v /home/me/dev/my-app:/www/my-app -w /www/my-app -t toubiweb/node-dev-tools gulp build
 ```
 
 ## Supported Node.js versions
@@ -79,45 +92,26 @@ To use last node [Long Term Support version](https://github.com/nodejs/LTS#lts-s
 
 
 ```bash
-docker run --rm -it -v $HOME/my-app:/app -t toubiweb/docker-node-dev-tools bash
-```
-or
-```bash
-docker run --rm -it -v $HOME/my-app:/app -t toubiweb/docker-node-dev-tools:lts bash
-```
-or
-```bash
-docker run --rm -it -v $HOME/my-app:/app -t toubiweb/docker-node-dev-tools:6 bash
-```
-or
-```bash
-docker run --rm -it -v $HOME/my-app:/app -t toubiweb/docker-node-dev-tools:6.9 bash
+docker run --rm -it -v $HOME/my-app:/app -t toubiweb/node-dev-tools:lts bash
 ```
 
-To use CURRENT (7.x) version:
+Available tags: latest, lts, 6, 6.11
+
+To use CURRENT (8.x) version:
+
+Available tags: current, 8, 8.1
+
+Tags are frequently updated. To be sure to use the last image, pull them:
 
 ```bash
-docker run --rm -it -v $HOME/my-app:/app -t toubiweb/docker-node-dev-tools:current bash
-```
-or
-```bash
-docker run --rm -it -v $HOME/my-app:/app -t toubiweb/docker-node-dev-tools:7 bash
-```
-or
-```bash
-docker run --rm -it -v $HOME/my-app:/app -t toubiweb/docker-node-dev-tools:7.0 bash
-```
-
-Tags are frequently updated: be sure to use the last image, e.g. for lts:
-
-```bash
-docker pull toubiweb/docker-node-dev-tools:lts
+docker pull toubiweb/node-dev-tools:lts
+docker pull toubiweb/node-dev-tools:current
 ```
 
 ## Supported Docker versions
 
-This image has been tested successfully on Docker version 1.12.3, but it should work on previous versions.
+This image has been tested successfully on Docker version 17.05.0, but it should also work on other recent versions.
 
 ## License
 
-[Apache-2](https://github.com/toubiweb/docker-node-dev-tools/blob/master/LICENSE)
+[Apache-2](https://github.com/toubiweb/node-dev-tools/blob/master/LICENSE)

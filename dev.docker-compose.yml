@@ -1,6 +1,6 @@
 dev:
   container_name: node-dev-tools
-  image: toubiweb/docker-node-dev-tools:lts
+  image: toubiweb/node-dev:lts
   command: tail -f /dev/null
   hostname: node-dev-tools
   volumes:

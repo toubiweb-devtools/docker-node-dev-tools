@@ -1,6 +1,7 @@
 #!/bin/bash
 
 CONTAINER_NAME=node-dev-tools
+CONTAINER_USER=dev
 
 set +e
 
@@ -14,7 +15,7 @@ set -x
 docker-compose --file $SCRIPTS_DIR/dev.docker-compose.yml up -d
 
 # enter interactively to container
-docker exec -it --user=dev $CONTAINER_NAME /bin/bash
+docker exec -it --user=$CONTAINER_USER $CONTAINER_NAME /bin/bash
 
 set +x
 
