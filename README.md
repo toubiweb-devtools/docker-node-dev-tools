@@ -100,6 +100,9 @@ Available tags: latest, lts, 6, 6.11
 
 To use CURRENT (8.x) version:
 
+```bash
+docker run --rm -it -v $HOME/my-app:/app -t toubiweb/node-dev-tools:current bash
+
 Available tags: current, 8, 8.1
 
 Tags are frequently updated. To be sure to use the last image, pull them:
