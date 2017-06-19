@@ -29,7 +29,7 @@ This image provide additionally:
 
 ### toubiweb/node-dev-tools image
 
-Development-mode image, based on toubiweb/node-core
+Development-mode image, based on toubiweb/node-dev
 
 This image provide additionally:
 * node development tools: npm, gulp, grunt, webpack, webpack-dev-server, @angular/cli, karma-cli, protractor, typescript, forever, nodemon, node-supervisor, yeoman, ava
