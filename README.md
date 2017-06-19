@@ -65,12 +65,13 @@ dev:
     - .:/app
     - $HOME/.ssh:/home/dev/.ssh
     - $HOME/.gitconfig:/home/dev/.gitconfig
+    - $HOME/.npmrc:/home/dev/.npmrc
   ports:
     - 3000:3000
     - 3001:3001
     - 35729:35729
 ```
-In this example, we also share ssh and git config so we can commit/push changes from within the container.
+In this example, we also share ssh, git & npm config so we can commit/push/publish from within the container.
 
 See [dev.docker-compose.yml](https://github.com/toubiweb/node-dev-tools/blob/master/dev.docker-compose.yml)
  and [run-dev.sh](https://github.com/toubiweb/node-dev-tools/blob/master/run-dev.sh)
